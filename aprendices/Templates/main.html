@@ -5,58 +5,68 @@
 {% block content %}
 <div class="row">
     <div class="col-12">
-        <div class="jumbotron bg-success text-white p-5 rounded shadow-sm">
+        <div class="jumbotron bg-success text-white p-5 rounded">
             <h1 class="display-4">Bienvenido a SENA APP</h1>
             <p class="lead">Sistema de Gestión de Aprendices del Servicio Nacional de Aprendizaje</p>
             <hr class="my-4">
-            <p>Administra y consulta la información de los aprendices, instructores y programas de manera eficiente.</p>
-            
-            <div class="d-grid gap-2 d-md-block">
-                <a class="btn btn-light btn-lg me-md-2" href="{% url 'aprendices:lista_aprendices' %}" role="button">
-                    Ver Aprendices
-                </a>
-                <a class="btn btn-light btn-lg me-md-2" href="{% url 'instructores:lista_instructores' %}" role="button">
-                    Ver Instructores
-                </a>
-                <a class="btn btn-light btn-lg" href="{% url 'programas:lista_programas' %}" role="button">
-                    Ver Programas
-                </a>
-            </div>
+            <p>Administra y consulta la información de los aprendices e instructores de manera eficiente.</p>
+            <a class="btn btn-light btn-lg" href="{% url 'aprendices:lista_aprendices' %}" role="button">
+                Ver Aprendices
+            </a>
+            <a class="btn btn-light btn-lg" href="{% url 'instructores:lista_instructores' %}" role="button">
+                Ver Instructores
+            </a>
+            <a class="btn btn-light btn-lg" href="{% url 'programas:lista_programas' %}" role="button">
+                Ver Programas
+            </a>
+            <a class="btn btn-light btn-lg" href="{% url 'cursos:lista_cursos' %}" role="button">
+                Ver Cursos
+            </a>
         </div>
     </div>
 </div>
 
 <div class="row mt-4">
-    
-    <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm border-0">
+    <div class="col-md-4">
+        <div class="card">
             <div class="card-body">
-                <h5 class="card-title text-success border-bottom pb-2">Lista de Aprendices</h5>
-                <p class="card-text mt-3">Consulta todos los aprendices registrados en el sistema.</p>
-                <p class="card-text fw-bold">Total de Aprendices: {{ total_aprendices }}</p>
+                <h5 class="card-title">Lista de Aprendices</h5>
+                <p class="card-text">Consulta todos los aprendices registrados en el sistema.</p>
+                <p class="card-text">Total de Aprendices: {{ total_aprendices}}</p>
                 <a href="{% url 'aprendices:lista_aprendices' %}" class="btn btn-success">Ver Lista</a>
             </div>
         </div>
     </div>
 
-    <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm border-0">
+    <div class="col-md-4">
+        <div class="card">
             <div class="card-body">
-                <h5 class="card-title text-success border-bottom pb-2">Lista de Instructores</h5>
-                <p class="card-text mt-3">Consulta todos los instructores registrados en el sistema.</p>
-                <p class="card-text fw-bold">Total de Instructores: {{ total_instructores }}</p>
+                <h5 class="card-title">Lista de Instructores</h5>
+                <p class="card-text">Consulta todos los instructores registrados en el sistema.</p>
+                <p class="card-text">Total de Instructores: {{ total_instructores}}</p>
                 <a href="{% url 'instructores:lista_instructores' %}" class="btn btn-success">Ver Lista</a>
             </div>
         </div>
     </div>
-
-    <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm border-0">
+    <div class="col-md-4">
+        <div class="card">
             <div class="card-body">
-                <h5 class="card-title text-success border-bottom pb-2">Lista de Programas</h5>
-                <p class="card-text mt-3">Consulta todos los programas de formación registrados.</p>
-                <p class="card-text fw-bold">Total de Programas: {{ total_programas }}</p>
+                <h5 class="card-title">Lista de Programas</h5>
+                <p class="card-text">Consulta todos los programas registrados en el sistema</p>
+                <p class="card-text">Total de Programas: {{ total_programas}}</p>
                 <a href="{% url 'programas:lista_programas' %}" class="btn btn-success">Ver Lista</a>
+            </div>
+        </div>
+    </div>
+
+        <div class="col-md-4 mt-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Lista de Cursos</h5>
+                <p class="card-text">Consulta todos los Cursos registrados en el sistema</p>
+                <p class="card-text">Total de Cursos: {{ total_cursos}}</p>
+                <p class="card-text">Cursos Activos: {{ cursos_activos}}</p>
+                <a href="{% url 'cursos:lista_cursos' %}" class="btn btn-success">Ver Lista</a>
             </div>
         </div>
     </div>

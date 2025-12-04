@@ -20,7 +20,7 @@ def programas(request):
 
 def detalle_programa(request, programa_id):
     programa_detalle = Programa.objects.get(id=programa_id)
-    template = loader.get_template("programa_detalle.html")
+    template = loader.get_template("detalle_programa.html")
     context = {
         "programa_detalle": programa_detalle,
     }
