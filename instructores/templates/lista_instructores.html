@@ -9,7 +9,7 @@
             <h2>Lista de Instructores SENA</h2>
             <div>
                 <span class="badge bg-info fs-6">Total: {{ total_instructores }} Instructores</span>
-                <a href="/" class="btn btn-success ms-2">
+                <a href="{% url 'instructores:crear_instructor' %}" class="btn btn-success ms-2">
                     Nuevo Instructor
                 </a>
             </div>
@@ -30,10 +30,9 @@
                         <th>Correo</th>
                         <th>Teléfono</th>
                         <th>Ciudad</th>
-                        <th>Direccion</th>
                         <th>Nivel Educativo</th>
-                        <th>Fecha Nacimiento</th>
                         <th>Especialidad</th>
+                        <th class="text-center">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,16 +40,40 @@
                     <tr>
                         <td><strong><a href ="instructor/{{ instructor.id }}">{{ instructor.documento_identidad }}</a></strong></td>
                         <td>{{ instructor.tipo_documento }}</td>
-                        <td>{{instructor.nombre}} {{instructor.apellido}}</td>
+                        <td>{{ instructor.nombre_completo }}</td>
                         <td>
                             <a href="mailto:{{ instructor.correo }}">{{ instructor.correo }}</a>
                         </td>
                         <td>{{ instructor.telefono }}</td>
                         <td>{{ instructor.ciudad }}</td>
-                        <td>{{ instructor.direccion }}</td>
                         <td>{{ instructor.nivel_educativo }}</td>
-                        <td>{{ instructor.fecha_nacimiento|date:"d/m/Y" }}</td>
                         <td>{{ instructor.especialidad }}</td>
+
+                        <td class="text-center">
+                            <!-- Botón Ver Detalles -->
+                            <a href="{% url 'instructores:detalle_instructor' instructor.id %}" 
+                               class="btn btn-sm btn-outline-info" 
+                               title="Ver detalles"
+                               data-bs-toggle="tooltip">
+                                <i class="bi bi-eye-fill"></i>
+                            </a>
+                            
+                            <!-- Botón Editar -->
+                            <a href="{% url 'instructores:editar_instructor' instructor.id %}" 
+                               class="btn btn-sm btn-outline-primary" 
+                               title="Editar instructor"
+                               data-bs-toggle="tooltip">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                            
+                            <!-- Botón Eliminar -->
+                            <a href="{% url 'instructores:eliminar_instructor' instructor.id %}" 
+                               class="btn btn-sm btn-outline-danger" 
+                               title="Eliminar instructor"
+                               data-bs-toggle="tooltip">
+                                <i class="bi bi-trash-fill"></i>
+                            </a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

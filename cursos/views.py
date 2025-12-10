@@ -5,7 +5,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 def lista_cursos(request):
-    cursos = Curso.objects.all().values()
+    cursos = Curso.objects.all()
     template = loader.get_template('lista_cursos.html')
     
     context = {

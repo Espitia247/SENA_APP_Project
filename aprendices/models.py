@@ -15,5 +15,5 @@ class Aprendiz(models.Model):
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
     
-    def nombre_completo_aprendiz(self):
+    def nombre_completo(self):
         return f"{self.nombre} {self.apellido}"
