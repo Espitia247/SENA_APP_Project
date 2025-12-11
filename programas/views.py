@@ -1,27 +1,62 @@
-from django.http import HttpResponse
-from django.template import loader
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Programa
+from .forms import ProgramaForm # Asegúrate de importar el formulario
 
-# Create your views here.
-
+# --- VISTA PRINCIPAL ---
 def main(request):
-    template = loader.get_template("main.html")
-    return HttpResponse(template.render())
+    return render(request, "main.html")
 
+# --- LISTAR ---
 def programas(request):
-    lista_programas = Programa.objects.all().values()
-    template = loader.get_template("lista_programas.html")
+    # OJO: Quité el .values() para que funcionen los métodos get_display en el HTML
+    lista_programas = Programa.objects.all() 
     context = {
-        "lista_programas": lista_programas,
+        "programas": lista_programas, # Cambié la clave a 'programas' para que coincida con tu HTML
         'total_programas': lista_programas.count(),
     }
-    return HttpResponse(template.render(context, request))
+    return render(request, "lista_programas.html", context)
 
+# views.py
 
 def detalle_programa(request, programa_id):
-    programa_detalle = Programa.objects.get(id=programa_id)
-    template = loader.get_template("detalle_programa.html")
+    programa = get_object_or_404(Programa, id=programa_id)
     context = {
-        "programa_detalle": programa_detalle,
+        "programa": programa, 
     }
-    return HttpResponse(template.render(context, request))
+    return render(request, "detalle_programa.html", context)
+
+# --- CREAR ---
+def crear_programa(request):
+    if request.method == 'POST':
+        form = ProgramaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('programas:lista_programas') # Redirige a la lista
+    else:
+        form = ProgramaForm()
+
+    return render(request, 'crear_programa.html', {'form': form})
+
+# --- EDITAR ---
+def editar_programa(request, programa_id):
+    programa = get_object_or_404(Programa, id=programa_id)
+    
+    if request.method == 'POST':
+        form = ProgramaForm(request.POST, instance=programa)
+        if form.is_valid():
+            form.save()
+            return redirect('programas:lista_programas')
+    else:
+        form = ProgramaForm(instance=programa) # Carga los datos existentes
+
+    return render(request, 'editar_programa.html', {'form': form})
+
+# --- ELIMINAR ---
+def eliminar_programa(request, programa_id):
+    programa = get_object_or_404(Programa, id=programa_id)
+    
+    if request.method == 'POST':
+        programa.delete()
+        return redirect('programas:lista_programas')
+        
+    return render(request, 'eliminar_programa.html', {'programa': programa})

@@ -4,9 +4,21 @@ from . import views
 app_name = 'programas'
 
 urlpatterns = [
-    # Ruta para la lista de programas
+    # Ruta principal
+    path('', views.main, name='main'),
+
+    # Listar
     path('programas/', views.programas, name='lista_programas'),
     
-    # Ruta para el detalle de un programa (usando el ID como parámetro)
-    path('programas/<int:programa_id>/', views.detalle_programa, name='detalle_programa'),
+    # Detalle
+    path('programas/detalle/<int:programa_id>/', views.detalle_programa, name='detalle_programa'),
+
+    # Crear
+    path('programas/crear/', views.crear_programa, name='crear_programa'),
+
+    # Editar
+    path('programas/editar/<int:programa_id>/', views.editar_programa, name='editar_programa'),
+
+    # Eliminar
+    path('programas/eliminar/<int:programa_id>/', views.eliminar_programa, name='eliminar_programa'),
 ]
